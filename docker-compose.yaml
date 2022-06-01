@@ -1,0 +1,43 @@
+version: '3.4'
+
+networks:
+    mstutorial:
+        ipam:
+            config:
+                - subnet: 10.1.1.0/24
+
+services: 
+  message:
+    image: rabbitmq:3-management
+    ports:
+       - 5672:5672
+       - 15672:15672
+    networks:
+        mstutorial: 
+            ipv4_address: 10.1.1.3
+        
+  platform:
+    image: ms-tutorial/platform:latest
+    environment:
+        - ASPNETCORE_ENVIRONMENT=development
+    networks: 
+        mstutorial:
+            ipv4_address: 10.1.1.4 
+    build:
+      context: .
+      dockerfile: "MSTutorial.PlatformService/Dockerfile"
+    ports:
+      - "5006:80"
+
+  command:
+    image: ms-tutorial/command:latest
+    environment:
+        - ASPNETCORE_ENVIRONMENT=development
+    networks: 
+        mstutorial:
+            ipv4_address: 10.1.1.5 
+    build:
+      context: .
+      dockerfile: "MSTutorial.CommandService/Dockerfile"
+    ports:
+      - "5007:80"
