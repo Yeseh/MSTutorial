@@ -5,15 +5,17 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{5A6DB3DB-9FB4-4246-87E0-34753B809566}"
 	ProjectSection(SolutionItems) = preProject
+		deploy-commandservice.yaml = deploy-commandservice.yaml
 		deploy-platformservice.yaml = deploy-platformservice.yaml
 		docker-compose.yaml = docker-compose.yaml
+		ingress-srv.yaml = ingress-srv.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTutorial.PlatformService", "MSTutorial.PlatformService\MSTutorial.PlatformService.csproj", "{C6658293-3EEE-44D2-A9BA-896F3CB39DFC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTutorial.Domain", "MSTutorial.Domain\MSTutorial.Domain.csproj", "{0C654DCC-C988-40DB-992D-3C71E29F9D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTutorial.CommandService", "MSTutorial.CommandService\MSTutorial.CommandService.csproj", "{2F28CBD3-D536-407C-9279-0228323EE8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTutorial.CommandService", "MSTutorial.CommandService\MSTutorial.CommandService.csproj", "{2F28CBD3-D536-407C-9279-0228323EE8A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

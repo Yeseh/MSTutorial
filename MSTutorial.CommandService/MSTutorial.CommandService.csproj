@@ -24,8 +24,4 @@
     <ProjectReference Include="..\MSTutorial.Domain\MSTutorial.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints\" />
-  </ItemGroup>
-
 </Project>

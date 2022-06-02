@@ -7,16 +7,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
-
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
-builder.Services.AddDbContext<AppDbContext>(opts =>
+if (builder.Environment.IsDevelopment())
 {
-    opts.UseInMemoryDatabase("Platforms");
-});
+    builder.Services.AddDbContext<AppDbContext>(opts =>
+    {
+        opts.UseInMemoryDatabase("Platforms");
+    });
+}
+else
+{
+    var connString = builder.Configuration.GetConnectionString("PlatformsConnectionString");
+    builder.Services.AddDbContext<AppDbContext>(opts =>
+    {
+        opts.UseSqlServer(connString);
+    });
+}
 
 var app = builder.Build();
 
@@ -27,7 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapPlatformEndpoints();
-DatabaseInitializer.Initialize(app);
+DatabaseInitializer.Initialize(app, app.Environment.IsProduction());
 
 var cmdUrl = builder.Configuration["CommandServiceUrl"];
 Console.WriteLine($"Commandservice configured at {cmdUrl}");

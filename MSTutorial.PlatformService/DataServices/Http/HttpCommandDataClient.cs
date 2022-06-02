@@ -27,11 +27,11 @@ public class HttpCommandDataClient : ICommandDataClient
 
         if (response.IsSuccessStatusCode)
         {
-            Console.WriteLine("-->Sync POST to CommandService was OK");
+            Console.WriteLine("--> Sync POST to CommandService was OK");
         }
         else
         {
-            Console.WriteLine("-->Sync POST to CommandService was NOT OK");
+            Console.WriteLine("--> Sync POST to CommandService was NOT OK");
         }
     }
 }
