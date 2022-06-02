@@ -8,12 +8,12 @@ public interface ICommandRepository
 
     // Platforms
     IEnumerable<PlatformModel> GetAllPlatforms();
-    void CreatePlatform(PlatformModel platform);
+    bool CreatePlatform(PlatformModel platform);
     bool PlatformExists(int platformId);
     bool ExternalPlatformExists(int externalPlatformId);
 
     // Commands
     IEnumerable<CommandModel> GetCommandsForPlatform(int platformId);
     CommandModel GetCommand(int platformId, int commandId);
-    void CreateCommand(int platformId, CommandModel command);
+    bool CreateCommand(int platformId, CommandModel command);
 }

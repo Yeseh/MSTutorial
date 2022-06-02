@@ -46,6 +46,8 @@ public class MessageBusSubscriber : BackgroundService, IDisposable
            Port = int.Parse(_configuration["RabbitMQPort"])
        };
 
+        Console.WriteLine($"--> Attempting to connect to Message bus @ {factory.HostName}:{factory.Port}");
+
        try 
        {
            _connection = factory.CreateConnection();

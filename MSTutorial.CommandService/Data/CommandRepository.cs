@@ -19,7 +19,7 @@ public class CommandRepository : ICommandRepository
         return SaveChanges();
     }
 
-    public void CreatePlatform(PlatformModel platform)
+    public bool CreatePlatform(PlatformModel platform)
     {
         if (platform is null) { throw new ArgumentNullException(nameof(platform)); }
 

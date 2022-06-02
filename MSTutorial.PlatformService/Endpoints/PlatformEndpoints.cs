@@ -57,7 +57,7 @@ public static class PlatformEndpoints
         pubDto.Event = "Platform_Published";
 
         try { _msgBus.PublishNewPlatform(pubDto); }
-        catch (Exception ex) { Console.WriteLine($"--> Could not publish message"); }
+        catch (Exception ex) { Console.WriteLine($"--> Could not publish message: {ex.Message}"); }
 
         return Results.CreatedAtRoute(nameof(GetPlatformById), new { Id = readDto.Id }, readDto);
     }

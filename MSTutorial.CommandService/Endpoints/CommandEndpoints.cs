@@ -21,36 +21,44 @@ public static class CommandEndpoints
     
    private static IResult GetCommandsForPlatform(int platformId, ICommandRepository _repo, IMapper _mapper)
    {
-      var bExists = _repo.PlatformExists(platformId);
-      if (!bExists) { return Results.NotFound(); }
+        var bExists = _repo.PlatformExists(platformId);
+        if (!bExists) { return Results.NotFound(); }
 
-      var result = _repo.GetCommandsForPlatform(platformId);
-      return Results.Ok(result);
+        var models = _repo.GetCommandsForPlatform(platformId);
+        var result = _mapper.Map<IEnumerable<CommandReadDto>>(models);
+
+        return Results.Ok(result);
    }
    
    private static IResult GetCommand(int platformId, int commandId,  ICommandRepository _repo, IMapper _mapper)
    {
-      var bExists = _repo.PlatformExists(platformId);
-      if (!bExists) { return Results.NotFound(); }
-      var model = _repo.GetCommand(platformId, commandId);
-      if (model is null) { return Results.NotFound(); }
+        var bExists = _repo.PlatformExists(platformId);
+        if (!bExists) { return Results.NotFound(); }
 
-      var result = _mapper.Map<CommandReadDto>(model);
-      return Results.Ok(result);
+        var model = _repo.GetCommand(platformId, commandId);
+        if (model is null) { return Results.NotFound(); }
+
+        var result = _mapper.Map<CommandReadDto>(model);
+        return Results.Ok(result);
    }
 
-   private static IResult CreateCommand(int platformId, CommandCreateDto command, ICommandRepository _repo, IMapper _mapper)
+   private static IResult CreateCommand(
+        int platformId, 
+        CommandCreateDto command, 
+        ICommandRepository _repo, 
+        IMapper _mapper)
    {
-      var bExists = _repo.PlatformExists(platformId);
-      if (!bExists) { return Results.NotFound(); }
+        var bExists = _repo.PlatformExists(platformId);
+        if (!bExists) { return Results.NotFound(); }
 
-      var model = _mapper.Map<CommandModel>(command);
-      _repo.CreateCommand(platformId, model);
+        var model = _mapper.Map<CommandModel>(command);
+        _repo.CreateCommand(platformId, model);
 
-      var created = _repo.SaveChanges();
-      if (!created) { return Results.BadRequest(); }
+        var created = _repo.SaveChanges();
+        if (!created) { return Results.BadRequest(); }
 
-      var result = _mapper.Map<CommandReadDto>(model);
-      return Results.CreatedAtRoute(nameof(CreateCommand), new { Id = result.Id }, result);
+        var result = _mapper.Map<CommandReadDto>(model);
+        var route = new { platformId = result.PlatformId, Id = result.Id };
+        return Results.CreatedAtRoute(nameof(CreateCommand), route, result);
    }
 }

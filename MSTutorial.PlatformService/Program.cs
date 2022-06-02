@@ -13,21 +13,11 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
-if (builder.Environment.IsDevelopment())
+var connString = builder.Configuration.GetConnectionString("PlatformsConnectionString");
+builder.Services.AddDbContext<AppDbContext>(opts =>
 {
-    builder.Services.AddDbContext<AppDbContext>(opts =>
-    {
-        opts.UseInMemoryDatabase("Platforms");
-    });
-}
-else
-{
-    var connString = builder.Configuration.GetConnectionString("PlatformsConnectionString");
-    builder.Services.AddDbContext<AppDbContext>(opts =>
-    {
-        opts.UseSqlServer(connString);
-    });
-}
+    opts.UseSqlServer(connString);
+});
 
 var app = builder.Build();
 
@@ -38,7 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapPlatformEndpoints();
-DatabaseInitializer.Initialize(app, app.Environment.IsProduction());
+DatabaseInitializer.Initialize(app);
 
 var cmdUrl = builder.Configuration["CommandServiceUrl"];
 Console.WriteLine($"Commandservice configured at {cmdUrl}");

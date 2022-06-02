@@ -5,12 +5,14 @@ using MSTutorial.CommandService.Endpoints;
 using MSTutorial.CommandService.EventProcessing;
 
 var builder = WebApplication.CreateBuilder(args);
+var sqlconnStr = builder.Configuration.GetConnectionString("CommandsConnectionString");
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("InMem"));
+//builder.Services.AddDbContext<AppDbContext>(o => o.UseSqlServer(sqlconnStr));
+builder.Services.AddDbContext<AppDbContext>(o => o.UseInMemoryDatabase("InMemory"));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICommandRepository, CommandRepository>();
@@ -30,5 +32,6 @@ if (app.Environment.IsDevelopment())
 app.MapPlatformEndpoints();
 app.MapCommandEndpoints();
 
+DatabaseInitializer.Initialize(app);
 
 app.Run();
