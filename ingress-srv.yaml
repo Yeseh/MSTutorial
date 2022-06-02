@@ -10,7 +10,6 @@ spec:
     - host: yeseh.app
       http: 
         paths: 
-
           - path: /api/platforms
             pathType: Prefix
             backend: 
@@ -18,7 +17,6 @@ spec:
                 name: platformcip-srv
                 port:
                   number: 80
-
           - path: /api/c/platforms
             pathType: Prefix
             backend:

@@ -28,6 +28,11 @@ public class CommandRepository : ICommandRepository
         _context.SaveChanges();
     }
 
+    public bool ExternalPlatformExists(int externalPlatformId)
+    {
+        return _context.Platforms.Any(p => p.ExternalId == externalPlatformId);
+    }
+
     public IEnumerable<PlatformModel> GetAllPlatforms()
     {
         return _context.Platforms.ToList();

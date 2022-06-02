@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MSTutorial.PlatformService.Data;
 using MSTutorial.PlatformService.Endpoints;
 using MSTutorial.PlatformService.DataServices.Http;
+using MSTutorial.PlatformService.DataServices.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPlatformRepository, PlatformRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+builder.Services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
 if (builder.Environment.IsDevelopment())
 {

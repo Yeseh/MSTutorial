@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using MSTutorial.PlatformService.Data;
 using MSTutorial.PlatformService.DataServices.Http;
+using MSTutorial.PlatformService.DataServices.MessageBus;
 using MSTutorial.PlatformService.Dtos;
 using MSTutorial.PlatformService.Models;
 
@@ -41,7 +41,8 @@ public static class PlatformEndpoints
         PlatformCreateDto platform, 
         IPlatformRepository repo, 
         IMapper mapper, 
-        ICommandDataClient cmdClient)
+        ICommandDataClient cmdClient,
+        IMessageBusClient _msgBus)
     {
         var model = mapper.Map<PlatformModel>(platform);
         var exists = repo.PlatformExists(model);
@@ -52,8 +53,11 @@ public static class PlatformEndpoints
         if (!created) { return Results.BadRequest(); }
 
         var readDto = mapper.Map<PlatformReadDto>(model);
-        try { await cmdClient.SendPlatformToCommand(readDto); }
-        catch (Exception ex) { Console.WriteLine($"--> Could not send synchronously: {ex.Message}"); }
+        var pubDto = mapper.Map<PlatformPublishedDto>(readDto);
+        pubDto.Event = "Platform_Published";
+
+        try { _msgBus.PublishNewPlatform(pubDto); }
+        catch (Exception ex) { Console.WriteLine($"--> Could not publish message"); }
 
         return Results.CreatedAtRoute(nameof(GetPlatformById), new { Id = readDto.Id }, readDto);
     }

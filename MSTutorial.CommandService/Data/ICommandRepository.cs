@@ -10,6 +10,7 @@ public interface ICommandRepository
     IEnumerable<PlatformModel> GetAllPlatforms();
     void CreatePlatform(PlatformModel platform);
     bool PlatformExists(int platformId);
+    bool ExternalPlatformExists(int externalPlatformId);
 
     // Commands
     IEnumerable<CommandModel> GetCommandsForPlatform(int platformId);
