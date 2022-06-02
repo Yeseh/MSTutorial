@@ -9,8 +9,8 @@ namespace MSTutorial.PlatformService.Endpoints;
 
 public static class PlatformEndpoints
 {
-    public const string PATH = "/";
-    public const string PATH_WITH_ID = PATH + "{id:int}";
+    public const string PATH = "/api/platforms";
+    public const string PATH_WITH_ID = PATH + "/{id:int}";
 
     public static void MapPlatformEndpoints(this WebApplication app)
     {

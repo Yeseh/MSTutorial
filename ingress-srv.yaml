@@ -5,14 +5,13 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: 'true'
-    nginx.ingress.kubernetes.io/rewrite-target: / 
 spec:
   rules:
     - host: yeseh.app
       http: 
         paths: 
 
-          - path: /platforms
+          - path: /api/platforms
             pathType: Prefix
             backend: 
               service:
@@ -20,7 +19,7 @@ spec:
                 port:
                   number: 80
 
-          - path: /c/platforms
+          - path: /api/c/platforms
             pathType: Prefix
             backend:
               service:
