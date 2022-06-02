@@ -2,7 +2,7 @@
 
 namespace MSTutorial.CommandService.Models;
 
-public class Platform
+public class PlatformModel
 {
     [Key]
     [Required]
@@ -14,5 +14,5 @@ public class Platform
     [Required]
     public string Name { get; set; }
 
-    public ICollection<Command> Commands { get; set; } = new List<Command>();
+    public ICollection<CommandModel> Commands { get; set; } = new List<CommandModel>();
 }

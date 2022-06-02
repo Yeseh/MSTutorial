@@ -2,7 +2,7 @@
 
 namespace MSTutorial.CommandService.Models;
 
-public class Command
+public class CommandModel
 {
     [Key]
     [Required]
@@ -17,5 +17,5 @@ public class Command
     [Required]
     public int PlatformId { get; set; }
 
-    public Platform Platform { get; set;  }
+    public PlatformModel Platform { get; set;  }
 }

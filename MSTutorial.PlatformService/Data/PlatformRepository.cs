@@ -30,8 +30,8 @@ public class PlatformRepository : IPlatformRepository
     public bool PlatformExists(PlatformModel platform)
     {
         var bExists = _context.Platforms.Any(p =>
-            string.Equals(p.Name, platform.Name, StringComparison.OrdinalIgnoreCase) &&
-            string.Equals(p.Publisher, platform.Publisher, StringComparison.OrdinalIgnoreCase)
+            string.Equals(p.Name, platform.Name) &&
+            string.Equals(p.Publisher, platform.Publisher)
         );
 
         return bExists;
