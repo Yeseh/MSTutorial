@@ -2,7 +2,7 @@
 
 public static class PlatformEndpoints
 {
-    private const string PATH = "/c";
+    private const string PATH = "/api/c";
     private const string PATH_WITH_ID = PATH + "/{id:int}";
 
     public static void MapPlatformEndpoints(this WebApplication app)
