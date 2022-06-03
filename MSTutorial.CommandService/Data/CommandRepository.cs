@@ -10,14 +10,13 @@ public class CommandRepository : ICommandRepository
        _context = context;
     }
 
-    public void CreateCommand(int platformId, CommandModel command)
+    public bool CreateCommand(int platformId, CommandModel command)
     {
         if (command is null) { throw new ArgumentNullException(nameof(command)); }
-
         command.PlatformId = platformId;
 
         _context.Commands.Add(command);
-        _context.SaveChanges();
+        return SaveChanges();
     }
 
     public void CreatePlatform(PlatformModel platform)
@@ -25,7 +24,7 @@ public class CommandRepository : ICommandRepository
         if (platform is null) { throw new ArgumentNullException(nameof(platform)); }
 
         _context.Add(platform);
-        _context.SaveChanges();
+        return SaveChanges();
     }
 
     public bool ExternalPlatformExists(int externalPlatformId)

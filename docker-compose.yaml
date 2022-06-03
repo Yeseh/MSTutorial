@@ -41,3 +41,17 @@ services:
       dockerfile: "MSTutorial.CommandService/Dockerfile"
     ports:
       - "5007:80"
+  
+  user:
+    image: ms-tutorial/user:latest
+    environment:
+        - ASPNETCORE_ENVIRONMENT=development
+    networks: 
+        mstutorial:
+            ipv4_address: 10.1.1.6
+    build:
+      context: .
+      dockerfile: "MSTutorial.UserService/Dockerfile"
+    ports:
+      - "5008:80"
+
