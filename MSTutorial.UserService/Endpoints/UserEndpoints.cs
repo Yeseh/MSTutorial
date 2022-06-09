@@ -43,8 +43,8 @@ public static class UserEndpoints
         if (bExists) { return Results.Conflict(); }
 
         var model = _mapper.Map<UserModel>(dto);
-        var created = _repo.CreateUser(model);
-        if (!created) { return Results.BadRequest(); }
+        var bCreate = _repo.CreateUser(model);
+        if (!bCreate) { return Results.BadRequest(); }
 
         var readDto = _mapper.Map<UserReadDto>(model);
         var route = new { Id = model.Id };
@@ -56,8 +56,8 @@ public static class UserEndpoints
 
     public static IResult DeleteUser(int userId, IUserRepository _repo, IMapper _mapper)
     {
-        var deleted = _repo.DeleteUser(userId);
-        if (!deleted) { return Results.NotFound(); }
+        var bDelete = _repo.DeleteUser(userId);
+        if (!bDelete) { return Results.NotFound(); }
 
         return Results.NoContent();
     }
@@ -65,8 +65,8 @@ public static class UserEndpoints
     public static IResult UpdateUser(UserUpdateDto dto, IUserRepository _repo, IMapper _mapper)
     {
         var model = _mapper.Map<UserModel>(dto);
-        var updated = _repo.UpdateUser(model);
-        if (!updated) { return Results.NotFound(); }
+        var bUpdate = _repo.UpdateUser(model);
+        if (!bUpdate) { return Results.NotFound(); }
 
         var readDto = _mapper.Map<UserReadDto>(model);
         return Results.Ok(readDto);

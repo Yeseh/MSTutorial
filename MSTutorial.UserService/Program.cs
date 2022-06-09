@@ -19,3 +19,5 @@ if (app.Environment.IsDevelopment())
 DatabaseInitializer.Initialize(app);
 
 app.Run();
+
+public partial class Program { }

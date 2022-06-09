@@ -21,10 +21,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSTutorial.CommandService", "MSTutorial.CommandService\MSTutorial.CommandService.csproj", "{2F28CBD3-D536-407C-9279-0228323EE8A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTutorial.UserService", "MSTutorial.UserService\MSTutorial.UserService.csproj", "{52226EC0-76BC-47EF-98A5-D3B1935B62FF}"
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{D96AEF15-F046-469C-B9AD-3A229D7FE928}"
 	ProjectSection(SolutionItems) = preProject
 		rebuild.ps1 = rebuild.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTutorial.UserService.Tests", "MSTutorial.UserService.Tests\MSTutorial.UserService.Tests.csproj", "{842F6CB9-75D3-4E4F-AAE8-6CB4E2C1C833}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +49,10 @@ Global
 		{52226EC0-76BC-47EF-98A5-D3B1935B62FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52226EC0-76BC-47EF-98A5-D3B1935B62FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52226EC0-76BC-47EF-98A5-D3B1935B62FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{842F6CB9-75D3-4E4F-AAE8-6CB4E2C1C833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842F6CB9-75D3-4E4F-AAE8-6CB4E2C1C833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842F6CB9-75D3-4E4F-AAE8-6CB4E2C1C833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842F6CB9-75D3-4E4F-AAE8-6CB4E2C1C833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
